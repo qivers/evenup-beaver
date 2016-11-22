@@ -78,4 +78,18 @@ describe 'beaver::stanza', :type => :define do
     it { should contain_file('/etc/beaver/conf.d/_var_log_messages__.log').with(:ensure => 'absent') }
   end
 
+  context 'with source, add_field_env, format' do
+    let(:title) { '/var/log/messages' }
+    let(:params) { {
+      :type            => 'messages',
+      :source          => '/var/local/log/messages',
+      :format          => 'rawjson',
+      :add_field_env   => 'field_env1, env_var1'
+    } }
+
+    it { should contain_file('/etc/beaver/conf.d/_var_log_messages').with_content(/^\[\/var\/local\/log\/messages\]$/) }
+    it { should contain_file('/etc/beaver/conf.d/_var_log_messages').with_content(/^add_field_env:\sfield_env1\,\ env_var1$/) }
+    it { should contain_file('/etc/beaver/conf.d/_var_log_messages').with_content(/^format:\srawjson$/) }
+  end
+
 end
