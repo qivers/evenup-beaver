@@ -27,6 +27,9 @@ exclude: (<%= @exclude %>)
 <% if @add_field.is_a?(String) -%>
 add_field: <%= @add_field %>
 <% end -%>
+<% if @add_field_env.is_a?(String) -%>
+add_field_env: <%= @add_field_env %>
+<% end -%>
 <% if @multiline_regex_before.is_a?(String) -%>
 multiline_regex_before: <%= @multiline_regex_before %>
 <% end -%>
